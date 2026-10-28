@@ -24,6 +24,16 @@ Last updated: 28 October 2026
 - [x] Run automated interaction checks (41 checks passed)
 - [x] Re-run the 390 px mobile overflow audit
 
+## Versioning and release
+
+- [x] Add a visible version badge to the site
+- [x] Add `version.json` release metadata
+- [x] Add `CHANGELOG.md`
+- [x] Create the `v1.0.0` Git tag
+- [x] Create the `v1.0.0` GitHub release
+- [x] Create a local backup archive
+- [x] Verify the live release metadata
+
 ## Publish and back up
 
 - [x] Create a GitHub repository for the site
@@ -71,3 +81,4 @@ Last updated: 28 October 2026
 - Published with GitHub Pages from the `main` branch.
 - A mobile audit at 390 px found no horizontal overflow on any page.
 - Automated interaction suite: 41 checks passing.
+- Current release: `v1.0.0`.

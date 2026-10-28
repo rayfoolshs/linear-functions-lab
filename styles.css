@@ -375,6 +375,19 @@ main {
   color: #8a96a8;
 }
 
+.version-pill {
+  display: inline-block;
+  padding: 0.08rem 0.45rem;
+  border: 1px solid #b8dcd4;
+  border-radius: 999px;
+  background: var(--teal-soft);
+  color: var(--teal-dark);
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0;
+}
+
 /* Pages and shared blocks */
 
 .page {

@@ -1,0 +1,10 @@
+{
+  "name": "Linear Functions Lab",
+  "version": "1.0.0",
+  "releaseDate": "2026-10-28",
+  "status": "stable",
+  "curriculum": "Year 8 Mathematics",
+  "live": "https://rayfoolshs.github.io/linear-functions-lab/",
+  "repository": "https://github.com/rayfoolshs/linear-functions-lab",
+  "changelog": "CHANGELOG.md"
+}

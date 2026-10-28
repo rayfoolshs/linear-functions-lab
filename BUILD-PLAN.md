@@ -1,5 +1,9 @@
 # Linear Functions Lab — Build Plan
 
+**Current version:** 1.0.0 (28 October 2026)  
+**Version history:** `CHANGELOG.md`  
+**Release metadata:** `version.json`
+
 ## 1. Purpose
 
 Create a learner-facing website for Year 8 students (12–13 years old) that scaffolds the key concepts of linear functions and algebra, with clear explanations, worked examples, visual models and immediate feedback.
@@ -212,7 +216,9 @@ The v2 and v3 builds are complete when:
 ```
 site/
   BUILD-PLAN.md      this plan
+  CHANGELOG.md       version history and release notes
   TODO.md            active checklist and future backlog
+  version.json       machine-readable release metadata
   index.html         lesson structure and interactive containers
   styles.css         visual system, tiles, balance, grid and responsive layout
   app.js             routing, progress, tools, quizzes and canvas logic
@@ -260,7 +266,10 @@ site/
 
 ## 11. Deployment
 
+- **Current version:** 1.0.0
 - **Live site:** https://rayfoolshs.github.io/linear-functions-lab/
 - **Repository:** https://github.com/rayfoolshs/linear-functions-lab
+- **Release:** `v1.0.0`
 - **Hosting:** GitHub Pages, deployed from the `main` branch root.
 - **Build step:** none — the committed static files are the deployed site.
+- **Backup:** Git tag, GitHub release and local release archive.
