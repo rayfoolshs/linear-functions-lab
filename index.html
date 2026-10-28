@@ -518,6 +518,10 @@
                   <tbody><tr><th>y</th><td>?</td><td>?</td><td>?</td><td>?</td></tr></tbody>
                 </table>
               </div>
+              <div class="mini-graph-wrap">
+                <canvas id="tableGraphCanvas" width="1200" height="720" aria-label="Graph of the table points"></canvas>
+                <p class="canvas-fallback" id="tableGraphFallback">Points plotted from the table. Find the rule to reveal the line.</p>
+              </div>
               <div class="control-row">
                 <label>Multiplier <input type="number" id="tableM" inputmode="numeric" placeholder="?"></label>
                 <label>Constant <input type="number" id="tableC" inputmode="numeric" placeholder="?"></label>
@@ -596,6 +600,43 @@
           </div>
 
           <div class="step-block">
+            <p class="step-label"><span>2</span> Try it</p>
+            <h2>Build a story rule</h2>
+            <p>Choose a story. Change the starting value and the rate. The bar model shows the fixed part and the repeated part.</p>
+            <div class="tool" id="storyTool">
+              <div class="story-choice" role="group" aria-label="Choose a story">
+                <button class="story-btn active" type="button" data-story="taxi">Taxi</button>
+                <button class="story-btn" type="button" data-story="savings">Savings</button>
+                <button class="story-btn" type="button" data-story="hire">Bike hire</button>
+              </div>
+              <p class="story-sentence" id="storySentence">A taxi charges a $6 flag fall plus $2 per kilometre.</p>
+              <div class="control-grid">
+                <div>
+                  <label class="range-label" for="storyFixed">Starting value <output id="storyFixedOut">$6</output></label>
+                  <input type="range" id="storyFixed" min="0" max="20" step="1" value="6">
+                </div>
+                <div>
+                  <label class="range-label" for="storyRate">Rate <output id="storyRateOut">$2</output></label>
+                  <input type="range" id="storyRate" min="1" max="10" step="1" value="2">
+                </div>
+                <div>
+                  <label class="range-label" for="storyQty" id="storyQtyLabel"><span id="storyQtyLabelText">Number of km</span> <output id="storyQtyOut">10 km</output></label>
+                  <input type="range" id="storyQty" min="0" max="20" step="1" value="10">
+                </div>
+              </div>
+              <div class="bar-model" id="storyBar" aria-label="Bar model showing the fixed and repeated parts">
+                <div class="bar-fixed" id="storyBarFixed"><span>start</span><strong>$6</strong></div>
+                <div class="bar-variable" id="storyBarVariable"><span>rate × amount</span><strong>$20</strong></div>
+              </div>
+              <div class="tool-result">
+                <p class="rule-line">Rule: <strong id="storyRule">C = 2d + 6</strong></p>
+                <p class="big-expression" id="storyResult">For 10 km, C = $26</p>
+                <p class="hint-text" id="storyExplanation">$2 × 10 = $20, then add the $6 starting value.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="step-block">
             <p class="step-label"><span>3</span> Your turn</p>
             <h2>Quick check</h2>
             <div class="quiz" data-quiz="words"></div>
@@ -652,6 +693,17 @@
               <p class="tool-title">Find the value</p>
               <p class="big-expression" id="subExpression">4x + 7</p>
               <p>When <code>x = <span id="subX">3</span></code>, what is the value?</p>
+              <div class="machine-visual live" id="subMachine" aria-label="Substitution flow">
+                <span class="machine-chip">x = <strong id="subMachineX">3</strong></span>
+                <span class="machine-arrow">→</span>
+                <span class="machine-chip">× <strong id="subMachineA">4</strong></span>
+                <span class="machine-arrow">→</span>
+                <span class="machine-chip">= <strong id="subMachineProduct">12</strong></span>
+                <span class="machine-arrow">→</span>
+                <span class="machine-chip"><span id="subMachineBSign">+</span> <strong id="subMachineB">7</strong></span>
+                <span class="machine-arrow">→</span>
+                <span class="machine-chip output">value = <strong id="subMachineResult">?</strong></span>
+              </div>
               <label class="inline-label">Your answer <input type="number" id="subAnswer" inputmode="numeric" placeholder="?"></label>
               <div class="tool-actions">
                 <button class="btn primary small" id="subCheck" type="button">Check</button>
@@ -939,6 +991,10 @@
                 <p class="rule-line">Rule: <strong id="costRule">C = 8n + 50</strong></p>
                 <p class="big-expression" id="costResult">Cost for 5 items = $90</p>
                 <p class="hint-text" id="costSteps">8 × 5 + 50 = 40 + 50 = 90</p>
+              </div>
+              <div class="mini-graph-wrap">
+                <canvas id="costGraphCanvas" width="1200" height="720" aria-label="Graph of cost against number of items"></canvas>
+                <p class="canvas-fallback" id="costGraphFallback">The line shows the cost rule. The dot shows your chosen quantity.</p>
               </div>
             </div>
           </div>

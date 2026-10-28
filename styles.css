@@ -1324,6 +1324,135 @@ tbody tr:last-child td {
   cursor: crosshair;
 }
 
+/* Mini graphs */
+
+.mini-graph-wrap {
+  margin: 0.9rem 0;
+  padding: 0.5rem;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: #fff;
+}
+
+#tableGraphCanvas,
+#costGraphCanvas {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 600 / 360;
+  border-radius: 10px;
+}
+
+.mini-graph-wrap .canvas-fallback {
+  margin: 0.3rem 0 0.1rem;
+}
+
+/* Story builder */
+
+.story-choice {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-bottom: 0.8rem;
+}
+
+.story-btn {
+  min-height: 36px;
+  padding: 0.42rem 0.8rem;
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  background: #fff;
+  color: var(--ink-soft);
+  font-size: 0.78rem;
+  font-weight: 750;
+  transition: background 150ms ease, border-color 150ms ease, color 150ms ease;
+}
+
+.story-btn:hover {
+  border-color: var(--teal);
+  color: var(--teal-dark);
+}
+
+.story-btn.active {
+  border-color: var(--teal);
+  background: var(--teal);
+  color: #fff;
+}
+
+.story-sentence {
+  margin: 0.6rem 0 0.8rem;
+  padding: 0.8rem 0.95rem;
+  border-left: 4px solid var(--amber);
+  border-radius: 0 10px 10px 0;
+  background: var(--amber-soft);
+  color: #5b431f;
+  font-size: 0.92rem;
+}
+
+.bar-model {
+  display: flex;
+  min-height: 72px;
+  margin: 0.8rem 0;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: #f2efe7;
+}
+
+.bar-fixed,
+.bar-variable {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.1rem;
+  padding: 0.5rem 0.6rem;
+  text-align: center;
+  transition: width 220ms ease;
+}
+
+.bar-fixed {
+  background: linear-gradient(180deg, #ffe9b8, #f6c96c);
+  color: #6b4a12;
+}
+
+.bar-variable {
+  background: linear-gradient(180deg, #d9f3ef, #a9ddd5);
+  color: var(--teal-dark);
+}
+
+.bar-fixed span,
+.bar-variable span {
+  overflow: hidden;
+  max-width: 100%;
+  font-size: 0.58rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.bar-fixed strong,
+.bar-variable strong {
+  color: inherit;
+  font-family: var(--mono);
+  font-size: 1.05rem;
+}
+
+@media (max-width: 620px) {
+  .bar-fixed,
+  .bar-variable {
+    padding: 0.45rem 0.35rem;
+  }
+
+  .bar-fixed span,
+  .bar-variable span {
+    font-size: 0.52rem;
+  }
+}
+
 
 .range-label {
   display: flex;

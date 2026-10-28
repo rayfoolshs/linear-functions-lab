@@ -203,7 +203,7 @@ The v2 build is complete when:
 - adaptive practice that responds to student errors
 - teacher mode with answers and misconception notes
 
-## 9. File map after v2
+## 9. File map after v3
 
 ```
 site/
@@ -214,7 +214,47 @@ site/
   app.js             routing, progress, tools, quizzes and canvas logic
 ```
 
-## 10. Deployment
+## 10. v3 visual additions and student prompts (implemented)
+
+### 10.1 Table-to-graph reveal — Lesson 4
+
+**Prompt shown to students:** "Points plotted from the table. Find the rule to reveal the line."
+
+**What it does:** plots the table values as points on a small coordinate grid. When the student enters the correct rule, the straight line is revealed and the prompt changes to show the rule.
+
+**Purpose:** connect a table of values, a rule and a graph in one view.
+
+### 10.2 Story-to-rule bar model — Lesson 5
+
+**Prompt shown to students:** "Choose a story. Change the starting value and the rate. The bar model shows the fixed part and the repeated part."
+
+**Story prompts:**
+
+- "A taxi charges a $6 flag fall plus $2 per kilometre."
+- "Mia starts with $60 saved and saves $25 each week."
+- "A bike hire shop charges a $30 booking fee plus $12 per hour."
+
+**What it does:** switches between three real-life contexts and updates the sentence, rule, calculation and proportional bar model live.
+
+**Purpose:** make the constant and the multiplier visible in a word problem.
+
+### 10.3 Visual substitution flow — Lesson 6
+
+**Prompt shown to students:** "Follow the value through the machine."
+
+**What it does:** shows `x` flowing through the multiplier, the product, the constant and the final value. The final value stays hidden until the student checks, reveals the steps, or asks for a hint.
+
+**Purpose:** make substitution a visible sequence rather than an abstract instruction.
+
+### 10.4 Live cost graph — Lesson 9
+
+**Prompt shown to students:** "The line shows the cost rule. The dot is your chosen quantity."
+
+**What it does:** plots `C = rate × n + fixed` and moves a point to the chosen number of items. The fixed cost appears as the y-intercept.
+
+**Purpose:** connect a real-life linear rule to its graph and show the meaning of the starting value.
+
+## 11. Deployment
 
 - **Live site:** https://rayfoolshs.github.io/linear-functions-lab/
 - **Repository:** https://github.com/rayfoolshs/linear-functions-lab

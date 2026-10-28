@@ -231,6 +231,12 @@
       drawGraph();
       drawPlotter();
     }
+    if (target.dataset.page === "tables") {
+      drawTableGraph();
+    }
+    if (target.dataset.page === "real-life") {
+      drawCostGraph();
+    }
   };
 
   window.addEventListener("hashchange", route);
@@ -758,6 +764,112 @@
   const tableCInput = $("#tableC");
   const tableFeedback = $("#tableFeedback");
   const tableHintText = $("#tableHintText");
+  const tableGraphCanvas = $("#tableGraphCanvas");
+  const tableGraphFallback = $("#tableGraphFallback");
+
+  function drawTableGraph() {
+    if (!tableGraphCanvas || !tableState) return;
+    const context = tableGraphCanvas.getContext("2d");
+    if (!context) return;
+
+    const width = 600;
+    const height = 360;
+    const scale = 2;
+    context.setTransform(scale, 0, 0, scale, 0, 0);
+    context.clearRect(0, 0, width, height);
+    context.fillStyle = "#ffffff";
+    context.fillRect(0, 0, width, height);
+
+    const pad = { left: 46, right: 20, top: 18, bottom: 36 };
+    const plotWidth = width - pad.left - pad.right;
+    const plotHeight = height - pad.top - pad.bottom;
+    const xs = tableState.xs;
+    const ys = tableState.ys;
+
+    const rawMin = Math.min(0, ...ys);
+    const rawMax = Math.max(0, ...ys);
+    const span = Math.max(1, rawMax - rawMin);
+    const roughStep = span / 4;
+    const magnitude = Math.pow(10, Math.floor(Math.log10(roughStep)));
+    const normalized = roughStep / magnitude;
+    const niceStep = Math.max(
+      1,
+      (normalized <= 1 ? 1 : normalized <= 2 ? 2 : normalized <= 5 ? 5 : 10) * magnitude
+    );
+    const yMin = rawMin < 0 ? Math.floor((rawMin - niceStep) / niceStep) * niceStep : 0;
+    const yMax = rawMax > 0 ? Math.ceil((rawMax + niceStep * 0.5) / niceStep) * niceStep : 0;
+
+    const toX = (x) => pad.left + ((x - xs[0]) / (xs[xs.length - 1] - xs[0])) * plotWidth;
+    const toY = (y) => pad.top + ((yMax - y) / (yMax - yMin)) * plotHeight;
+
+    context.lineWidth = 1;
+    context.strokeStyle = "#e8e3d8";
+    xs.forEach((x) => {
+      context.beginPath();
+      context.moveTo(toX(x), pad.top);
+      context.lineTo(toX(x), height - pad.bottom);
+      context.stroke();
+    });
+    for (let y = yMin; y <= yMax + niceStep * 0.001; y += niceStep) {
+      context.beginPath();
+      context.moveTo(pad.left, toY(y));
+      context.lineTo(width - pad.right, toY(y));
+      context.stroke();
+    }
+
+    context.strokeStyle = "#8a96a8";
+    context.lineWidth = 1.5;
+    if (yMin <= 0 && yMax >= 0) {
+      context.beginPath();
+      context.moveTo(pad.left, toY(0));
+      context.lineTo(width - pad.right, toY(0));
+      context.stroke();
+    }
+    context.beginPath();
+    context.moveTo(toX(xs[0]), pad.top);
+    context.lineTo(toX(xs[0]), height - pad.bottom);
+    context.stroke();
+
+    context.fillStyle = "#69788e";
+    context.font = "11px ui-sans-serif, system-ui, sans-serif";
+    context.textAlign = "center";
+    context.textBaseline = "top";
+    xs.forEach((x) => {
+      context.fillText(formatNum(x), toX(x), height - pad.bottom + 7);
+    });
+
+    context.textAlign = "right";
+    context.textBaseline = "middle";
+    for (let y = yMin; y <= yMax + niceStep * 0.001; y += niceStep) {
+      context.fillText(formatNum(y), pad.left - 7, toY(y));
+    }
+
+    if (tableState.solved) {
+      context.strokeStyle = "#0f766e";
+      context.lineWidth = 3;
+      context.lineCap = "round";
+      context.beginPath();
+      context.moveTo(toX(xs[0]), toY(tableState.m * xs[0] + tableState.c));
+      context.lineTo(toX(xs[xs.length - 1]), toY(tableState.m * xs[xs.length - 1] + tableState.c));
+      context.stroke();
+    }
+
+    xs.forEach((x, index) => {
+      context.beginPath();
+      context.arc(toX(x), toY(ys[index]), 5, 0, Math.PI * 2);
+      context.fillStyle = "#e9a23b";
+      context.fill();
+      context.lineWidth = 2;
+      context.strokeStyle = "#ffffff";
+      context.stroke();
+    });
+
+    if (tableGraphFallback) {
+      tableGraphFallback.textContent = tableState.solved
+        ? `Line revealed: ${formatRule(tableState.m, tableState.c)}.`
+        : "Points plotted from the table. Find the rule to reveal the line.";
+    }
+  }
 
   const updateTablePreview = () => {
     const mPreview = $("#tableMPreview");
@@ -776,7 +888,7 @@
     const c = randInt(-5, 10);
     const xs = [0, 1, 2, 3];
     const ys = xs.map((x) => m * x + c);
-    tableState = { m, c, xs, ys };
+    tableState = { m, c, xs, ys, solved: false };
 
     if (tableTable) {
       const body = $("tbody", tableTable);
@@ -796,6 +908,7 @@
       tableHintText.textContent = "";
     }
     updateTablePreview();
+    drawTableGraph();
   };
 
   tableMInput?.addEventListener("input", updateTablePreview);
@@ -817,6 +930,8 @@
     const c = Number(cRaw);
 
     if (m === tableState.m && c === tableState.c) {
+      tableState.solved = true;
+      drawTableGraph();
       tableFeedback.textContent = `Correct. The rule is ${formatRule(m, c)}.`;
       tableFeedback.className = "feedback good";
     } else if (m === tableState.m) {
@@ -850,6 +965,148 @@
   });
 
   /* ------------------------------------------------------------
+     Lesson 5: story-to-rule builder
+     ------------------------------------------------------------ */
+
+  const storyContexts = {
+    taxi: {
+      fixed: 6,
+      rate: 2,
+      qty: 10,
+      fixedMax: 20,
+      rateMax: 10,
+      qtyMax: 30,
+      output: "C",
+      variable: "d",
+      qtyLabel: "Number of km",
+      qtyUnit: "km",
+      startLabel: "flag fall",
+      rateLabel: "cost per km",
+      sentence: (fixed, rate) => `A taxi charges a $${fixed} flag fall plus $${rate} per kilometre.`
+    },
+    savings: {
+      fixed: 60,
+      rate: 25,
+      qty: 8,
+      fixedMax: 200,
+      rateMax: 50,
+      qtyMax: 20,
+      output: "S",
+      variable: "w",
+      qtyLabel: "Number of weeks",
+      qtyUnit: "weeks",
+      startLabel: "starting savings",
+      rateLabel: "saved each week",
+      sentence: (fixed, rate) => `Mia starts with $${fixed} saved and saves $${rate} each week.`
+    },
+    hire: {
+      fixed: 30,
+      rate: 12,
+      qty: 5,
+      fixedMax: 100,
+      rateMax: 30,
+      qtyMax: 20,
+      output: "C",
+      variable: "h",
+      qtyLabel: "Number of hours",
+      qtyUnit: "hours",
+      startLabel: "booking fee",
+      rateLabel: "cost per hour",
+      sentence: (fixed, rate) => `A bike hire shop charges a $${fixed} booking fee plus $${rate} per hour.`
+    }
+  };
+
+  let storyKey = "taxi";
+
+  const storyFixed = $("#storyFixed");
+  const storyRate = $("#storyRate");
+  const storyQty = $("#storyQty");
+  const storyFixedOut = $("#storyFixedOut");
+  const storyRateOut = $("#storyRateOut");
+  const storyQtyOut = $("#storyQtyOut");
+  const storyQtyLabelText = $("#storyQtyLabelText");
+  const storySentence = $("#storySentence");
+  const storyRule = $("#storyRule");
+  const storyResult = $("#storyResult");
+  const storyExplanation = $("#storyExplanation");
+  const storyBarFixed = $("#storyBarFixed");
+  const storyBarVariable = $("#storyBarVariable");
+
+  const updateStory = () => {
+    if (!storyFixed || !storyRate || !storyQty) return;
+    const context = storyContexts[storyKey];
+    const fixed = Number(storyFixed.value);
+    const rate = Number(storyRate.value);
+    const quantity = Number(storyQty.value);
+    const total = fixed + rate * quantity;
+
+    if (storyFixedOut) storyFixedOut.textContent = `$${fixed}`;
+    if (storyRateOut) storyRateOut.textContent = `$${rate}`;
+    if (storyQtyOut) storyQtyOut.textContent = `${quantity} ${context.qtyUnit}`;
+    if (storyQtyLabelText) storyQtyLabelText.textContent = context.qtyLabel;
+    if (storySentence) storySentence.textContent = context.sentence(fixed, rate);
+    if (storyRule) {
+      storyRule.textContent = `${context.output} = ${formatRuleWithVar(rate, fixed, context.variable)}`;
+    }
+    if (storyResult) {
+      storyResult.textContent = `For ${quantity} ${context.qtyUnit}, ${context.output} = $${total}`;
+    }
+    if (storyExplanation) {
+      storyExplanation.textContent = `$${rate} × ${quantity} = $${rate * quantity}, then add the $${fixed} starting value.`;
+    }
+
+    const variableTotal = rate * quantity;
+    const barTotal = fixed + variableTotal;
+    if (storyBarFixed) {
+      storyBarFixed.innerHTML = `<span>${context.startLabel}</span><strong>$${fixed}</strong>`;
+      storyBarFixed.style.display = fixed === 0 ? "none" : "flex";
+      storyBarFixed.style.width = barTotal === 0 ? "0%" : `${(fixed / barTotal) * 100}%`;
+    }
+    if (storyBarVariable) {
+      storyBarVariable.innerHTML = `<span>${context.rateLabel} × ${quantity}</span><strong>$${variableTotal}</strong>`;
+      storyBarVariable.style.display = variableTotal === 0 ? "none" : "flex";
+      storyBarVariable.style.width = barTotal === 0 ? "100%" : `${(variableTotal / barTotal) * 100}%`;
+    }
+  };
+
+  const setStoryContext = (key) => {
+    if (!storyContexts[key] || !storyFixed || !storyRate || !storyQty) return;
+    storyKey = key;
+    const context = storyContexts[key];
+
+    storyFixed.min = "0";
+    storyFixed.max = String(context.fixedMax);
+    storyFixed.step = "1";
+    storyFixed.value = String(context.fixed);
+
+    storyRate.min = "1";
+    storyRate.max = String(context.rateMax);
+    storyRate.step = "1";
+    storyRate.value = String(context.rate);
+
+    storyQty.min = "0";
+    storyQty.max = String(context.qtyMax);
+    storyQty.step = "1";
+    storyQty.value = String(context.qty);
+
+    $$(".story-btn").forEach((button) => {
+      const isActive = button.dataset.story === key;
+      button.classList.toggle("active", isActive);
+      button.setAttribute("aria-pressed", String(isActive));
+    });
+
+    updateStory();
+  };
+
+  [storyFixed, storyRate, storyQty].forEach((input) => {
+    input?.addEventListener("input", updateStory);
+  });
+
+  $$(".story-btn").forEach((button) => {
+    button.addEventListener("click", () => setStoryContext(button.dataset.story));
+  });
+
+  /* ------------------------------------------------------------
      Lesson 6: substitution
      ------------------------------------------------------------ */
 
@@ -860,6 +1117,17 @@
   const subAnswer = $("#subAnswer");
   const subFeedback = $("#subFeedback");
   const subSteps = $("#subSteps");
+  const subMachineX = $("#subMachineX");
+  const subMachineA = $("#subMachineA");
+  const subMachineProduct = $("#subMachineProduct");
+  const subMachineBSign = $("#subMachineBSign");
+  const subMachineB = $("#subMachineB");
+  const subMachineResult = $("#subMachineResult");
+
+  const revealSubMachine = () => {
+    if (!subState || !subMachineResult) return;
+    subMachineResult.textContent = formatNum(subState.answer);
+  };
 
   const newSubstitution = () => {
     const a = randInt(2, 6);
@@ -870,6 +1138,12 @@
 
     if (subExpression) subExpression.textContent = formatExpression(a, b);
     if (subX) subX.textContent = formatNum(x);
+    if (subMachineX) subMachineX.textContent = formatNum(x);
+    if (subMachineA) subMachineA.textContent = String(a);
+    if (subMachineProduct) subMachineProduct.textContent = formatNum(a * x);
+    if (subMachineBSign) subMachineBSign.textContent = b < 0 ? "−" : "+";
+    if (subMachineB) subMachineB.textContent = formatNum(Math.abs(b));
+    if (subMachineResult) subMachineResult.textContent = "?";
     if (subAnswer) subAnswer.value = "";
     if (subFeedback) {
       subFeedback.textContent = "";
@@ -890,6 +1164,8 @@
       return;
     }
 
+    revealSubMachine();
+
     if (Number(raw) === subState.answer) {
       subFeedback.textContent = `Correct. The value is ${formatNum(subState.answer)}.`;
       subFeedback.className = "feedback good";
@@ -901,6 +1177,7 @@
 
   $("#subHint")?.addEventListener("click", () => {
     if (!subState || !subSteps) return;
+    revealSubMachine();
     const { a, b, x, answer } = subState;
     const xText = x < 0 ? `(${formatNum(x)})` : `${x}`;
     const bPart = b === 0 ? "" : ` ${formatSigned(b)}`;
@@ -1503,6 +1780,110 @@
   const costFixed = $("#costFixed");
   const costRate = $("#costRate");
   const costQty = $("#costQty");
+  const costGraphCanvas = $("#costGraphCanvas");
+  const costGraphFallback = $("#costGraphFallback");
+
+  function drawCostGraph() {
+    if (!costGraphCanvas || !costFixed || !costRate || !costQty) return;
+    const context = costGraphCanvas.getContext("2d");
+    if (!context) return;
+
+    const fixed = Number(costFixed.value);
+    const rate = Number(costRate.value);
+    const quantity = Number(costQty.value);
+    const total = rate * quantity + fixed;
+
+    const width = 600;
+    const height = 360;
+    const scale = 2;
+    context.setTransform(scale, 0, 0, scale, 0, 0);
+    context.clearRect(0, 0, width, height);
+    context.fillStyle = "#ffffff";
+    context.fillRect(0, 0, width, height);
+
+    const pad = { left: 54, right: 22, top: 18, bottom: 36 };
+    const plotWidth = width - pad.left - pad.right;
+    const plotHeight = height - pad.top - pad.bottom;
+    const xMax = 20;
+    const rawMax = rate * xMax + fixed;
+    const step = rawMax <= 100 ? 10 : rawMax <= 300 ? 50 : 100;
+    const yMax = Math.max(step, Math.ceil(rawMax / step) * step);
+
+    const toX = (x) => pad.left + (x / xMax) * plotWidth;
+    const toY = (y) => pad.top + ((yMax - y) / yMax) * plotHeight;
+
+    context.lineWidth = 1;
+    context.strokeStyle = "#e8e3d8";
+    for (let x = 0; x <= xMax; x += 5) {
+      context.beginPath();
+      context.moveTo(toX(x), pad.top);
+      context.lineTo(toX(x), height - pad.bottom);
+      context.stroke();
+    }
+    for (let i = 0; i <= 5; i += 1) {
+      const y = (yMax * i) / 5;
+      context.beginPath();
+      context.moveTo(pad.left, toY(y));
+      context.lineTo(width - pad.right, toY(y));
+      context.stroke();
+    }
+
+    context.strokeStyle = "#8a96a8";
+    context.lineWidth = 1.5;
+    context.beginPath();
+    context.moveTo(pad.left, height - pad.bottom);
+    context.lineTo(width - pad.right, height - pad.bottom);
+    context.stroke();
+    context.beginPath();
+    context.moveTo(pad.left, pad.top);
+    context.lineTo(pad.left, height - pad.bottom);
+    context.stroke();
+
+    context.fillStyle = "#69788e";
+    context.font = "11px ui-sans-serif, system-ui, sans-serif";
+    context.textAlign = "center";
+    context.textBaseline = "top";
+    for (let x = 0; x <= xMax; x += 5) {
+      context.fillText(formatNum(x), toX(x), height - pad.bottom + 7);
+    }
+
+    context.textAlign = "right";
+    context.textBaseline = "middle";
+    for (let i = 0; i <= 5; i += 1) {
+      const y = (yMax * i) / 5;
+      context.fillText(`$${formatNum(Math.round(y))}`, pad.left - 7, toY(y));
+    }
+
+    context.strokeStyle = "#0f766e";
+    context.lineWidth = 3;
+    context.lineCap = "round";
+    context.beginPath();
+    context.moveTo(toX(0), toY(fixed));
+    context.lineTo(toX(xMax), toY(rate * xMax + fixed));
+    context.stroke();
+
+    context.beginPath();
+    context.arc(toX(quantity), toY(total), 6, 0, Math.PI * 2);
+    context.fillStyle = "#e9a23b";
+    context.fill();
+    context.lineWidth = 2.5;
+    context.strokeStyle = "#ffffff";
+    context.stroke();
+
+    context.fillStyle = "#3d4d66";
+    context.font = "bold 11px ui-sans-serif, system-ui, sans-serif";
+    context.textAlign = quantity > 15 ? "right" : "left";
+    context.textBaseline = "bottom";
+    context.fillText(
+      `(${quantity}, $${total})`,
+      toX(quantity) + (quantity > 15 ? -8 : 8),
+      toY(total) - 7
+    );
+
+    if (costGraphFallback) {
+      costGraphFallback.textContent = `The line shows C = ${formatRuleWithVar(rate, fixed, "n")}. The dot is (${quantity}, $${total}).`;
+    }
+  }
 
   const updateCost = () => {
     if (!costFixed || !costRate || !costQty) return;
@@ -1522,6 +1903,7 @@
     setText("#costRule", `C = ${formatRuleWithVar(rate, fixed, "n")}`);
     setText("#costResult", `Cost for ${quantity} item${quantity === 1 ? "" : "s"} = $${total}`);
     setText("#costSteps", `${rate} × ${quantity} + ${fixed} = ${rate * quantity} + ${fixed} = ${total}`);
+    drawCostGraph();
   };
 
   [costFixed, costRate, costQty].forEach((input) => {
@@ -1721,6 +2103,7 @@
   newNextTerm();
   updateMachine();
   newTable();
+  setStoryContext("taxi");
   newSubstitution();
   newEquation();
   newBalance();

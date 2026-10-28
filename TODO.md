@@ -14,6 +14,16 @@ Last updated: 28 October 2026
 - [x] Run automated interaction checks
 - [x] Confirm no JavaScript runtime errors (34 checks passed)
 
+## v3 visual additions
+
+- [x] Add table-to-graph reveal to Lesson 4
+- [x] Add story-to-rule bar model to Lesson 5
+- [x] Add visual substitution flow to Lesson 6
+- [x] Add live cost graph to Lesson 9
+- [x] Add student prompts to `BUILD-PLAN.md`
+- [x] Run automated interaction checks (41 checks passed)
+- [x] Re-run the 390 px mobile overflow audit
+
 ## Publish and back up
 
 - [x] Create a GitHub repository for the site
@@ -46,6 +56,10 @@ Last updated: 28 October 2026
 - [x] Growing pattern tiles and rule update together
 - [x] Balance scale completes both steps
 - [x] Coordinate grid accepts correct clicks and reveals the line
+- [x] Table-to-graph reveal appears when the rule is correct
+- [x] Story builder updates the rule, result and bar model
+- [x] Substitution machine reveals the final value
+- [x] Cost graph follows the rule and chosen quantity
 - [x] Mobile menu opens and closes
 - [x] No horizontal scrolling on a 390 px viewport
 
@@ -56,3 +70,4 @@ Last updated: 28 October 2026
 - Build documentation: `BUILD-PLAN.md`.
 - Published with GitHub Pages from the `main` branch.
 - A mobile audit at 390 px found no horizontal overflow on any page.
+- Automated interaction suite: 41 checks passing.
