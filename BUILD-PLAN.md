@@ -74,7 +74,7 @@ site/
 
 No build step, package manager or server is required. `index.html` can be opened directly.
 
-## 5. v2 build — additional graphical interactives
+## 5. v2 build — additional graphical interactives (implemented)
 
 The goal of v2 is to make abstract ideas more visible and manipulable.
 
@@ -208,7 +208,15 @@ The v2 build is complete when:
 ```
 site/
   BUILD-PLAN.md      this plan
+  TODO.md            active checklist and future backlog
   index.html         lesson structure and interactive containers
   styles.css         visual system, tiles, balance, grid and responsive layout
   app.js             routing, progress, tools, quizzes and canvas logic
 ```
+
+## 10. Deployment
+
+- **Live site:** https://rayfoolshs.github.io/linear-functions-lab/
+- **Repository:** https://github.com/rayfoolshs/linear-functions-lab
+- **Hosting:** GitHub Pages, deployed from the `main` branch root.
+- **Build step:** none — the committed static files are the deployed site.

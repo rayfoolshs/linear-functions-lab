@@ -16,11 +16,14 @@ Last updated: 28 October 2026
 
 ## Publish and back up
 
-- [ ] Create a GitHub repository for the site
-- [ ] Push the site files to GitHub
-- [ ] Enable GitHub Pages
-- [ ] Verify the live site loads correctly
-- [ ] Add the live URL to this file
+- [x] Create a GitHub repository for the site
+- [x] Push the site files to GitHub
+- [x] Enable GitHub Pages
+- [x] Verify the live site loads correctly
+- [x] Add the live URL to this file
+
+**Live site:** https://rayfoolshs.github.io/linear-functions-lab/  
+**Repository:** https://github.com/rayfoolshs/linear-functions-lab
 
 ## Future backlog
 
@@ -51,3 +54,5 @@ Last updated: 28 October 2026
 - The site is dependency-free and runs by opening `index.html`.
 - Source files: `index.html`, `styles.css`, `app.js`.
 - Build documentation: `BUILD-PLAN.md`.
+- Published with GitHub Pages from the `main` branch.
+- A mobile audit at 390 px found no horizontal overflow on any page.
