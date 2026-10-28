@@ -1,0 +1,1043 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="A guided Year 8 website for learning linear functions, patterns, equations and graphs.">
+  <title>Linear Functions Lab | Year 8 Mathematics</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <div class="app">
+    <aside class="sidebar" id="sidebar" aria-label="Lesson navigation">
+      <div class="sidebar-top">
+        <a class="brand" href="#home">
+          <span class="brand-mark" aria-hidden="true">y</span>
+          <span>
+            <strong>Linear Functions</strong>
+            <small>Year 8 Lab</small>
+          </span>
+        </a>
+        <button class="icon-btn close-menu" id="closeMenu" type="button" aria-label="Close menu">×</button>
+      </div>
+
+      <nav class="nav">
+        <a href="#home" data-nav="home" class="nav-link">
+          <span class="nav-num">H</span> Home
+        </a>
+        <p class="nav-label">Lessons</p>
+        <a href="#letters" data-nav="letters" class="nav-link"><span class="nav-num">1</span> Letters &amp; terms</a>
+        <a href="#patterns" data-nav="patterns" class="nav-link"><span class="nav-num">2</span> Patterns</a>
+        <a href="#machines" data-nav="machines" class="nav-link"><span class="nav-num">3</span> Function machines</a>
+        <a href="#tables" data-nav="tables" class="nav-link"><span class="nav-num">4</span> Tables to rules</a>
+        <a href="#words" data-nav="words" class="nav-link"><span class="nav-num">5</span> Words to algebra</a>
+        <a href="#substitute" data-nav="substitute" class="nav-link"><span class="nav-num">6</span> Substitution</a>
+        <a href="#equations" data-nav="equations" class="nav-link"><span class="nav-num">7</span> Solving equations</a>
+        <a href="#graphs" data-nav="graphs" class="nav-link"><span class="nav-num">8</span> Graphing</a>
+        <a href="#real-life" data-nav="real-life" class="nav-link"><span class="nav-num">9</span> Real-life rules</a>
+        <a href="#practice" data-nav="practice" class="nav-link"><span class="nav-num">10</span> Practice challenge</a>
+      </nav>
+
+      <div class="sidebar-progress">
+        <div class="progress-heading">
+          <span>Your progress</span>
+          <strong id="sidebarProgressText">0 / 10</strong>
+        </div>
+        <div class="progress-track" aria-hidden="true">
+          <div class="progress-fill" id="sidebarProgressFill"></div>
+        </div>
+        <p class="progress-note" id="progressNote">Complete a lesson to start your streak.</p>
+        <button class="link-btn reset-btn" id="resetProgress" type="button">Reset progress</button>
+      </div>
+    </aside>
+
+    <div class="backdrop" id="backdrop" hidden></div>
+
+    <div class="content-column">
+      <header class="mobile-bar">
+        <button class="icon-btn" id="menuBtn" type="button" aria-label="Open menu" aria-controls="sidebar" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+        <a class="mobile-brand" href="#home">Linear Functions Lab</a>
+        <span class="mobile-progress" id="mobileProgress">0/10</span>
+      </header>
+
+      <main id="main" tabindex="-1">
+        <!-- HOME -->
+        <section class="page active" id="page-home" data-page="home">
+          <div class="hero">
+            <div class="hero-copy">
+              <p class="eyebrow">Year 8 mathematics</p>
+              <h1>Build a rule.<br>Solve the mystery.<br>Draw the line.</h1>
+              <p class="hero-lead">A step-by-step guide to linear functions, patterns, equations and graphs.</p>
+              <div class="hero-actions">
+                <a class="btn primary" href="#letters">Start lesson 1</a>
+                <a class="btn ghost" href="#practice">Try the practice challenge</a>
+              </div>
+            </div>
+            <div class="hero-panel" aria-label="Example linear function">
+              <p class="panel-label">A rule in action</p>
+              <p class="panel-equation">y = 2x + 3</p>
+              <div class="panel-table">
+                <div><span>x</span><strong>0</strong><strong>1</strong><strong>2</strong><strong>3</strong></div>
+                <div><span>y</span><strong>3</strong><strong>5</strong><strong>7</strong><strong>9</strong></div>
+              </div>
+              <p class="panel-note">Each time x goes up by 1, y goes up by 2.</p>
+            </div>
+          </div>
+
+          <section class="section">
+            <div class="section-heading">
+              <div>
+                <p class="eyebrow">Your learning path</p>
+                <h2>Ten small steps</h2>
+              </div>
+              <p class="section-intro">Work through the lessons in order, or jump to the skill you need.</p>
+            </div>
+
+            <div class="path-grid">
+              <a class="path-card" href="#letters" data-card="letters">
+                <span class="card-num">01</span>
+                <h3>Letters &amp; terms</h3>
+                <p>Understand variables, coefficients and constants.</p>
+                <span class="card-status" data-status="letters">Not started</span>
+              </a>
+              <a class="path-card" href="#patterns" data-card="patterns">
+                <span class="card-num">02</span>
+                <h3>Patterns</h3>
+                <p>Spot the step and predict what comes next.</p>
+                <span class="card-status" data-status="patterns">Not started</span>
+              </a>
+              <a class="path-card" href="#machines" data-card="machines">
+                <span class="card-num">03</span>
+                <h3>Function machines</h3>
+                <p>See how an input becomes an output.</p>
+                <span class="card-status" data-status="machines">Not started</span>
+              </a>
+              <a class="path-card" href="#tables" data-card="tables">
+                <span class="card-num">04</span>
+                <h3>Tables to rules</h3>
+                <p>Turn a table of values into an equation.</p>
+                <span class="card-status" data-status="tables">Not started</span>
+              </a>
+              <a class="path-card" href="#words" data-card="words">
+                <span class="card-num">05</span>
+                <h3>Words to algebra</h3>
+                <p>Translate stories into expressions and rules.</p>
+                <span class="card-status" data-status="words">Not started</span>
+              </a>
+              <a class="path-card" href="#substitute" data-card="substitute">
+                <span class="card-num">06</span>
+                <h3>Substitution</h3>
+                <p>Put numbers into expressions and evaluate them.</p>
+                <span class="card-status" data-status="substitute">Not started</span>
+              </a>
+              <a class="path-card" href="#equations" data-card="equations">
+                <span class="card-num">07</span>
+                <h3>Solving equations</h3>
+                <p>Use balance and backtracking to find x.</p>
+                <span class="card-status" data-status="equations">Not started</span>
+              </a>
+              <a class="path-card" href="#graphs" data-card="graphs">
+                <span class="card-num">08</span>
+                <h3>Graphing</h3>
+                <p>Plot a rule and see the straight line.</p>
+                <span class="card-status" data-status="graphs">Not started</span>
+              </a>
+              <a class="path-card" href="#real-life" data-card="real-life">
+                <span class="card-num">09</span>
+                <h3>Real-life rules</h3>
+                <p>Model taxis, savings and phone plans.</p>
+                <span class="card-status" data-status="real-life">Not started</span>
+              </a>
+              <a class="path-card" href="#practice" data-card="practice">
+                <span class="card-num">10</span>
+                <h3>Practice challenge</h3>
+                <p>Mix everything together and test yourself.</p>
+                <span class="card-status" data-status="practice">Not started</span>
+              </a>
+            </div>
+          </section>
+
+          <section class="section">
+            <div class="section-heading">
+              <div>
+                <p class="eyebrow">How it works</p>
+                <h2>See it. Try it. Own it.</h2>
+              </div>
+            </div>
+            <div class="three-grid">
+              <div class="mini-card">
+                <span class="pill">See it</span>
+                <h3>A clear explanation</h3>
+                <p>Each lesson starts with one idea, a simple example and the steps written out.</p>
+              </div>
+              <div class="mini-card">
+                <span class="pill">Try it</span>
+                <h3>Change the numbers</h3>
+                <p>Use the interactive tools to see what happens when the numbers change.</p>
+              </div>
+              <div class="mini-card">
+                <span class="pill">Your turn</span>
+                <h3>Check yourself</h3>
+                <p>Answer quick questions, get instant feedback and use the hints when you need them.</p>
+              </div>
+            </div>
+          </section>
+
+          <section class="section quick-ref">
+            <div class="section-heading">
+              <div>
+                <p class="eyebrow">Quick reference</p>
+                <h2>Remember these three things</h2>
+              </div>
+            </div>
+            <div class="three-grid">
+              <div class="mini-card">
+                <h3>3n means 3 × n</h3>
+                <p>The number next to a letter means multiply. If n = 4, then 3n = 12.</p>
+              </div>
+              <div class="mini-card">
+                <h3>Rule from a table</h3>
+                <p>Multiplier = how much y changes each step. Constant = y when x = 0.</p>
+              </div>
+              <div class="mini-card">
+                <h3>Solve an equation</h3>
+                <p>Undo the addition or subtraction first. Then undo the multiplication or division.</p>
+              </div>
+            </div>
+          </section>
+        </section>
+
+        <!-- LESSON 1 -->
+        <section class="page lesson" id="page-letters" data-page="letters">
+          <div class="lesson-head">
+            <p class="eyebrow">Lesson 1</p>
+            <h1>Letters are numbers in disguise</h1>
+            <p class="lead">In algebra, a letter stands for a number. It is called a variable because its value can change.</p>
+            <div class="goal"><strong>Your goal:</strong> explain what <code>3n</code> means and identify the coefficient and constant in an expression.</div>
+          </div>
+
+          <div class="step-block">
+            <p class="step-label"><span>1</span> See it</p>
+            <h2>What does 3n mean?</h2>
+            <p><code>3n</code> means <strong>3 × n</strong>. It does not mean 3 + n.</p>
+            <div class="example">
+              <p class="example-title">Example</p>
+              <p>If <code>n = 4</code>, then:</p>
+              <p class="big-expression">3n = 3 × 4 = 12</p>
+              <p>If <code>n = 10</code>, then:</p>
+              <p class="big-expression">3n = 3 × 10 = 30</p>
+            </div>
+            <p>In <code>3n + 5</code>:</p>
+            <div class="term-row">
+              <div class="term-card"><strong>3</strong><span>coefficient</span><small>the number multiplying n</small></div>
+              <div class="term-card"><strong>n</strong><span>variable</span><small>the number that can change</small></div>
+              <div class="term-card"><strong>5</strong><span>constant</span><small>the number that stays the same</small></div>
+            </div>
+            <div class="table-wrap">
+              <table>
+                <caption>Rule: y = 3n + 5</caption>
+                <thead><tr><th>n</th><th>0</th><th>1</th><th>2</th><th>3</th><th>4</th></tr></thead>
+                <tbody><tr><th>y</th><td>5</td><td>8</td><td>11</td><td>14</td><td>17</td></tr></tbody>
+              </table>
+            </div>
+            <p class="callout">Notice: every time <code>n</code> goes up by 1, <code>y</code> goes up by <strong>3</strong>. That is the coefficient at work.</p>
+          </div>
+
+          <div class="step-block">
+            <p class="step-label"><span>2</span> Try it</p>
+            <h2>Change the value of n</h2>
+            <p>Move the slider. Watch how the value of <code>3n + 5</code> changes.</p>
+            <div class="tool" id="letterTool">
+              <label class="range-label" for="letterN">Choose n <output id="letterNOut">4</output></label>
+              <input type="range" id="letterN" min="0" max="10" value="4">
+              <div class="tool-result">
+                <p class="big-expression" id="letterEquation">3 × 4 + 5 = 17</p>
+                <p class="hint-text" id="letterExplanation">Three groups of 4 is 12, then add 5 to get 17.</p>
+              </div>
+            </div>
+
+            <h3>Build it with algebra tiles</h3>
+            <p>Long tiles show <code>x</code>. Small squares show units. The expression changes as you add tiles.</p>
+            <div class="tool" id="tileTool">
+              <div class="control-grid">
+                <div>
+                  <label class="range-label" for="tileXCount">x tiles <output id="tileXOut">3</output></label>
+                  <input type="range" id="tileXCount" min="1" max="5" value="3">
+                </div>
+                <div>
+                  <label class="range-label" for="tileUnits">unit tiles <output id="tileUnitOut">5</output></label>
+                  <input type="range" id="tileUnits" min="0" max="8" value="5">
+                </div>
+              </div>
+              <div class="tile-board" id="tileBoard" aria-label="Algebra tile display"></div>
+              <div class="tool-result">
+                <p class="rule-line">Expression: <strong id="tileExpression">3x + 5</strong></p>
+                <p class="hint-text" id="tileExplanation">3 x-tiles and 5 unit tiles. You cannot combine x-tiles and units.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="step-block">
+            <p class="step-label"><span>3</span> Your turn</p>
+            <h2>Quick check</h2>
+            <div class="quiz" data-quiz="letters"></div>
+          </div>
+
+          <div class="lesson-nav">
+            <a class="btn ghost" href="#home">Back to home</a>
+            <button class="btn secondary complete-btn" data-complete="letters" type="button">Mark lesson complete</button>
+            <a class="btn primary" href="#patterns">Next lesson</a>
+          </div>
+        </section>
+
+        <!-- LESSON 2 -->
+        <section class="page lesson" id="page-patterns" data-page="patterns">
+          <div class="lesson-head">
+            <p class="eyebrow">Lesson 2</p>
+            <h1>Spot the pattern, then write the rule</h1>
+            <p class="lead">A linear pattern changes by the same amount each time. Find the step, then use it to predict.</p>
+            <div class="goal"><strong>Your goal:</strong> find the constant step in a pattern and write a rule for the nth term.</div>
+          </div>
+
+          <div class="step-block">
+            <p class="step-label"><span>1</span> See it</p>
+            <h2>A growing tile pattern</h2>
+            <div class="table-wrap">
+              <table>
+                <caption>Shape number and number of tiles</caption>
+                <thead><tr><th>Shape number, n</th><th>1</th><th>2</th><th>3</th><th>4</th></tr></thead>
+                <tbody><tr><th>Number of tiles, t</th><td>4</td><td>7</td><td>10</td><td>13</td></tr></tbody>
+              </table>
+            </div>
+            <div class="example">
+              <p class="example-title">Think it through</p>
+              <ol class="steps-list">
+                <li>The tiles go up by <strong>3</strong> each time. So the multiplier is 3.</li>
+                <li>Work backwards to Shape 0: 4 − 3 = <strong>1</strong>. So the constant is 1.</li>
+                <li>The rule is <strong>t = 3n + 1</strong>.</li>
+                <li>Check Shape 5: 3 × 5 + 1 = <strong>16 tiles</strong>.</li>
+              </ol>
+            </div>
+            <div class="callout">
+              <strong>The easy method:</strong> multiplier = how much it goes up each time. Constant = what Shape 0 would be.
+            </div>
+            <h3>What if the pattern goes down?</h3>
+            <p>For 20, 18, 16, the step is <strong>−2</strong>. Work backwards: 20 + 2 = 22. The rule is <strong>y = −2n + 22</strong>.</p>
+          </div>
+
+          <div class="step-block">
+            <p class="step-label"><span>2</span> Try it</p>
+            <h2>See the pattern grow</h2>
+            <p>Choose a starting number of tiles, a step, and a shape number. Watch the visual pattern and the rule change together.</p>
+            <div class="tool" id="growPatternTool">
+              <div class="control-grid">
+                <div>
+                  <label class="range-label" for="patternStart">Shape 1 tiles <output id="patternStartOut">4</output></label>
+                  <input type="range" id="patternStart" min="1" max="4" value="4">
+                </div>
+                <div>
+                  <label class="range-label" for="patternStep">Tiles added each time <output id="patternStepOut">3</output></label>
+                  <input type="range" id="patternStep" min="1" max="4" value="3">
+                </div>
+                <div>
+                  <label class="range-label" for="patternShape">Shape number <output id="patternShapeOut">3</output></label>
+                  <input type="range" id="patternShape" min="1" max="6" value="3">
+                </div>
+              </div>
+              <div class="pattern-tile-board" id="patternTileBoard" aria-label="Growing tile pattern"></div>
+              <div class="tool-result">
+                <p class="big-expression" id="patternTileSummary">Shape 3 has 10 tiles.</p>
+                <p class="rule-line">Rule: <strong id="patternTileRule">t = 3n + 1</strong></p>
+                <p class="hint-text" id="patternTileExplanation">Start with 4 tiles. Each new shape adds 3 tiles.</p>
+              </div>
+            </div>
+
+            <h3>What comes next?</h3>
+            <p>Look at the sequence. Type the next term, then check.</p>
+            <div class="tool" id="nextTermTool">
+              <p class="tool-title">Pattern detective</p>
+              <div class="pattern-sequence" id="nextTermSequence">5, 8, 11, 14</div>
+              <label class="inline-label">Next term <input type="number" id="nextTermInput" inputmode="numeric" placeholder="?"></label>
+              <div class="tool-actions">
+                <button class="btn primary small" id="nextTermCheck" type="button">Check</button>
+                <button class="btn ghost small" id="nextTermNew" type="button">New pattern</button>
+              </div>
+              <p class="feedback" id="nextTermFeedback" aria-live="polite"></p>
+              <p class="hint-text" id="nextTermRule"></p>
+            </div>
+          </div>
+
+          <div class="step-block">
+            <p class="step-label"><span>3</span> Your turn</p>
+            <h2>Quick check</h2>
+            <div class="quiz" data-quiz="patterns"></div>
+          </div>
+
+          <div class="lesson-nav">
+            <a class="btn ghost" href="#letters">Previous lesson</a>
+            <button class="btn secondary complete-btn" data-complete="patterns" type="button">Mark lesson complete</button>
+            <a class="btn primary" href="#machines">Next lesson</a>
+          </div>
+        </section>
+
+        <!-- LESSON 3 -->
+        <section class="page lesson" id="page-machines" data-page="machines">
+          <div class="lesson-head">
+            <p class="eyebrow">Lesson 3</p>
+            <h1>Function machines</h1>
+            <p class="lead">A function is a rule that turns an input into an output. You can see the rule working one step at a time.</p>
+            <div class="goal"><strong>Your goal:</strong> use a function machine forwards and backwards.</div>
+          </div>
+
+          <div class="step-block">
+            <p class="step-label"><span>1</span> See it</p>
+            <h2>Input, rule, output</h2>
+            <div class="machine-visual" aria-hidden="true">
+              <span class="machine-chip">Input <strong>x</strong></span>
+              <span class="machine-arrow">→</span>
+              <span class="machine-chip">× 2</span>
+              <span class="machine-arrow">→</span>
+              <span class="machine-chip">+ 3</span>
+              <span class="machine-arrow">→</span>
+              <span class="machine-chip output">Output <strong>y</strong></span>
+            </div>
+            <p class="big-expression">y = 2x + 3</p>
+            <div class="table-wrap">
+              <table>
+                <caption>Input and output values</caption>
+                <thead><tr><th>x</th><th>0</th><th>1</th><th>2</th><th>3</th><th>4</th></tr></thead>
+                <tbody><tr><th>y</th><td>3</td><td>5</td><td>7</td><td>9</td><td>11</td></tr></tbody>
+              </table>
+            </div>
+            <div class="example">
+              <p class="example-title">Working backwards</p>
+              <p>If the output is 15, what was the input?</p>
+              <p>Undo the machine in reverse order: 15 − 3 = 12, then 12 ÷ 2 = <strong>6</strong>.</p>
+              <p>Check: 2 × 6 + 3 = 15.</p>
+            </div>
+          </div>
+
+          <div class="step-block">
+            <p class="step-label"><span>2</span> Try it</p>
+            <h2>Build your own machine</h2>
+            <p>Change the multiplier, the constant and the input. Watch the machine work.</p>
+            <div class="tool" id="machineTool">
+              <div class="machine-visual live" id="machineVisual">
+                <span class="machine-chip">Input <strong id="machineX">4</strong></span>
+                <span class="machine-arrow">→</span>
+                <span class="machine-chip">× <strong id="machineM">2</strong></span>
+                <span class="machine-arrow">→</span>
+                <span class="machine-chip"><span id="machineCSign">+</span> <strong id="machineC">3</strong></span>
+                <span class="machine-arrow">→</span>
+                <span class="machine-chip output">Output <strong id="machineY">11</strong></span>
+              </div>
+              <div class="control-grid">
+                <label class="range-label" for="machineXRange">Input x <output id="machineXOut">4</output></label>
+                <input type="range" id="machineXRange" min="-5" max="5" value="4">
+                <label class="range-label" for="machineMRange">Multiplier <output id="machineMOut">2</output></label>
+                <input type="range" id="machineMRange" min="-5" max="5" value="2">
+                <label class="range-label" for="machineCRange">Constant <output id="machineCOut">3</output></label>
+                <input type="range" id="machineCRange" min="-10" max="10" value="3">
+              </div>
+              <div class="tool-result">
+                <p class="rule-line">Rule: <strong id="machineRule">y = 2x + 3</strong></p>
+                <p class="hint-text" id="machineSteps">4 × 2 = 8, then 8 + 3 = 11.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="step-block">
+            <p class="step-label"><span>3</span> Your turn</p>
+            <h2>Quick check</h2>
+            <div class="quiz" data-quiz="machines"></div>
+          </div>
+
+          <div class="lesson-nav">
+            <a class="btn ghost" href="#patterns">Previous lesson</a>
+            <button class="btn secondary complete-btn" data-complete="machines" type="button">Mark lesson complete</button>
+            <a class="btn primary" href="#tables">Next lesson</a>
+          </div>
+        </section>
+
+        <!-- LESSON 4 -->
+        <section class="page lesson" id="page-tables" data-page="tables">
+          <div class="lesson-head">
+            <p class="eyebrow">Lesson 4</p>
+            <h1>From a table to a rule</h1>
+            <p class="lead">A table shows pairs of input and output values. You can use the pattern to write the rule.</p>
+            <div class="goal"><strong>Your goal:</strong> write a linear rule from a table of values.</div>
+          </div>
+
+          <div class="step-block">
+            <p class="step-label"><span>1</span> See it</p>
+            <h2>Three steps to a rule</h2>
+            <ol class="steps-list">
+              <li>Find how much <code>y</code> changes each time. That is the <strong>multiplier</strong>.</li>
+              <li>Find <code>y</code> when <code>x = 0</code>. That is the <strong>constant</strong>.</li>
+              <li>Write: <strong>y = multiplier × x + constant</strong>.</li>
+            </ol>
+            <div class="example">
+              <p class="example-title">Example 1: starting at 0</p>
+              <div class="table-wrap">
+                <table>
+                  <thead><tr><th>x</th><th>0</th><th>1</th><th>2</th><th>3</th></tr></thead>
+                  <tbody><tr><th>y</th><td>7</td><td>11</td><td>15</td><td>19</td></tr></tbody>
+                </table>
+              </div>
+              <p><code>y</code> goes up by <strong>4</strong> each time. When <code>x = 0</code>, <code>y = 7</code>.</p>
+              <p class="big-expression">y = 4x + 7</p>
+              <p>Check: 4 × 3 + 7 = 19.</p>
+            </div>
+            <div class="example">
+              <p class="example-title">Example 2: not starting at 0</p>
+              <div class="table-wrap">
+                <table>
+                  <thead><tr><th>x</th><th>1</th><th>2</th><th>3</th><th>4</th></tr></thead>
+                  <tbody><tr><th>y</th><td>9</td><td>13</td><td>17</td><td>21</td></tr></tbody>
+                </table>
+              </div>
+              <p><code>y</code> goes up by <strong>4</strong>. Work backwards to <code>x = 0</code>: 9 − 4 = <strong>5</strong>.</p>
+              <p class="big-expression">y = 4x + 5</p>
+            </div>
+          </div>
+
+          <div class="step-block">
+            <p class="step-label"><span>2</span> Try it</p>
+            <h2>Rule builder</h2>
+            <p>Look at the table. Enter the multiplier and constant, then check.</p>
+            <div class="tool" id="tableTool">
+              <p class="tool-title">Build the rule</p>
+              <div class="table-wrap">
+                <table id="tableToolTable">
+                  <thead><tr><th>x</th><th>0</th><th>1</th><th>2</th><th>3</th></tr></thead>
+                  <tbody><tr><th>y</th><td>?</td><td>?</td><td>?</td><td>?</td></tr></tbody>
+                </table>
+              </div>
+              <div class="control-row">
+                <label>Multiplier <input type="number" id="tableM" inputmode="numeric" placeholder="?"></label>
+                <label>Constant <input type="number" id="tableC" inputmode="numeric" placeholder="?"></label>
+              </div>
+              <p class="rule-line">Your rule: <strong>y = <span id="tableMPreview">?</span>x + <span id="tableCPreview">?</span></strong></p>
+              <div class="tool-actions">
+                <button class="btn primary small" id="tableCheck" type="button">Check rule</button>
+                <button class="btn ghost small" id="tableNew" type="button">New table</button>
+              </div>
+              <p class="feedback" id="tableFeedback" aria-live="polite"></p>
+              <button class="link-btn" id="tableHint" type="button">Show me a hint</button>
+              <p class="hint-text" id="tableHintText" hidden></p>
+            </div>
+          </div>
+
+          <div class="step-block">
+            <p class="step-label"><span>3</span> Your turn</p>
+            <h2>Quick check</h2>
+            <div class="quiz" data-quiz="tables"></div>
+          </div>
+
+          <div class="lesson-nav">
+            <a class="btn ghost" href="#machines">Previous lesson</a>
+            <button class="btn secondary complete-btn" data-complete="tables" type="button">Mark lesson complete</button>
+            <a class="btn primary" href="#words">Next lesson</a>
+          </div>
+        </section>
+
+        <!-- LESSON 5 -->
+        <section class="page lesson" id="page-words" data-page="words">
+          <div class="lesson-head">
+            <p class="eyebrow">Lesson 5</p>
+            <h1>Turning words into algebra</h1>
+            <p class="lead">Stories often hide a rule. Name the variables, find the starting value and the rate, then write the rule.</p>
+            <div class="goal"><strong>Your goal:</strong> translate words into expressions and real-life rules.</div>
+          </div>
+
+          <div class="step-block">
+            <p class="step-label"><span>1</span> See it</p>
+            <h2>Useful translations</h2>
+            <div class="word-bank">
+              <details><summary>5 more than a number</summary><p><code>n + 5</code></p></details>
+              <details><summary>5 less than a number</summary><p><code>n − 5</code></p></details>
+              <details><summary>Double a number, then add 3</summary><p><code>2n + 3</code></p></details>
+              <details><summary>7 less than 4 times a number</summary><p><code>4n − 7</code></p></details>
+              <details><summary>Half a number, then add 9</summary><p><code>n/2 + 9</code></p></details>
+              <details><summary>The sum of 3 times a number and 8</summary><p><code>3n + 8</code></p></details>
+            </div>
+            <div class="example">
+              <p class="example-title">Example: taxi fare</p>
+              <p>A taxi charges a <strong>$6</strong> flag fall plus <strong>$2 per kilometre</strong>.</p>
+              <p>Let <code>d</code> be the distance and <code>C</code> be the cost.</p>
+              <p class="big-expression">C = 2d + 6</p>
+              <p>For 12 km: C = 2 × 12 + 6 = <strong>$30</strong>.</p>
+            </div>
+            <div class="callout">
+              <strong>Look for two numbers:</strong> the fixed starting amount (constant) and the amount for each item, hour or kilometre (multiplier).
+            </div>
+          </div>
+
+          <div class="step-block">
+            <p class="step-label"><span>2</span> Try it</p>
+            <h2>Build a rule from a story</h2>
+            <div class="example">
+              <p>A hire company charges a <strong>$30</strong> booking fee plus <strong>$12 per hour</strong>.</p>
+              <p>Let <code>h</code> be the number of hours and <code>C</code> be the cost.</p>
+              <details class="reveal"><summary>Show the rule</summary><p class="big-expression">C = 12h + 30</p></details>
+              <details class="reveal"><summary>Show the cost for 5 hours</summary><p>C = 12 × 5 + 30 = 60 + 30 = <strong>$90</strong></p></details>
+            </div>
+            <div class="example">
+              <p>A plumber charges a <strong>$80</strong> call-out fee plus <strong>$45 per hour</strong>. The bill is <strong>$260</strong>.</p>
+              <p>Let <code>h</code> be the number of hours.</p>
+              <details class="reveal"><summary>Show the equation</summary><p class="big-expression">45h + 80 = 260</p></details>
+              <details class="reveal"><summary>Show the solution</summary><p>45h = 180, so <strong>h = 4 hours</strong>.</p></details>
+            </div>
+          </div>
+
+          <div class="step-block">
+            <p class="step-label"><span>3</span> Your turn</p>
+            <h2>Quick check</h2>
+            <div class="quiz" data-quiz="words"></div>
+          </div>
+
+          <div class="lesson-nav">
+            <a class="btn ghost" href="#tables">Previous lesson</a>
+            <button class="btn secondary complete-btn" data-complete="words" type="button">Mark lesson complete</button>
+            <a class="btn primary" href="#substitute">Next lesson</a>
+          </div>
+        </section>
+
+        <!-- LESSON 6 -->
+        <section class="page lesson" id="page-substitute" data-page="substitute">
+          <div class="lesson-head">
+            <p class="eyebrow">Lesson 6</p>
+            <h1>Substitution: putting numbers in</h1>
+            <p class="lead">Substitution means replacing a letter with a number, then working out the value.</p>
+            <div class="goal"><strong>Your goal:</strong> evaluate an expression for a given value of the variable.</div>
+          </div>
+
+          <div class="step-block">
+            <p class="step-label"><span>1</span> See it</p>
+            <h2>Replace the letter carefully</h2>
+            <div class="example">
+              <p class="example-title">Example 1</p>
+              <p>Evaluate <code>4x + 7</code> when <code>x = 3</code>.</p>
+              <div class="steps">
+                <p>4x + 7</p>
+                <p>= 4 × 3 + 7</p>
+                <p>= 12 + 7</p>
+                <p>= <strong>19</strong></p>
+              </div>
+            </div>
+            <div class="example">
+              <p class="example-title">Example 2: a negative number</p>
+              <p>Evaluate <code>3x + 2</code> when <code>x = −2</code>.</p>
+              <div class="steps">
+                <p>3x + 2</p>
+                <p>= 3 × (−2) + 2</p>
+                <p>= −6 + 2</p>
+                <p>= <strong>−4</strong></p>
+              </div>
+            </div>
+            <div class="callout">
+              <strong>Tip:</strong> write the multiplication sign at first. It reminds you that <code>4x</code> means <code>4 × x</code>.
+            </div>
+          </div>
+
+          <div class="step-block">
+            <p class="step-label"><span>2</span> Try it</p>
+            <h2>Substitution practice</h2>
+            <div class="tool" id="subTool">
+              <p class="tool-title">Find the value</p>
+              <p class="big-expression" id="subExpression">4x + 7</p>
+              <p>When <code>x = <span id="subX">3</span></code>, what is the value?</p>
+              <label class="inline-label">Your answer <input type="number" id="subAnswer" inputmode="numeric" placeholder="?"></label>
+              <div class="tool-actions">
+                <button class="btn primary small" id="subCheck" type="button">Check</button>
+                <button class="btn ghost small" id="subNew" type="button">New question</button>
+              </div>
+              <p class="feedback" id="subFeedback" aria-live="polite"></p>
+              <button class="link-btn" id="subHint" type="button">Show me the steps</button>
+              <div class="steps" id="subSteps" hidden></div>
+            </div>
+          </div>
+
+          <div class="step-block">
+            <p class="step-label"><span>3</span> Your turn</p>
+            <h2>Quick check</h2>
+            <div class="quiz" data-quiz="substitute"></div>
+          </div>
+
+          <div class="lesson-nav">
+            <a class="btn ghost" href="#words">Previous lesson</a>
+            <button class="btn secondary complete-btn" data-complete="substitute" type="button">Mark lesson complete</button>
+            <a class="btn primary" href="#equations">Next lesson</a>
+          </div>
+        </section>
+
+        <!-- LESSON 7 -->
+        <section class="page lesson" id="page-equations" data-page="equations">
+          <div class="lesson-head">
+            <p class="eyebrow">Lesson 7</p>
+            <h1>Solving equations</h1>
+            <p class="lead">An equation is a balance. To find the value of <code>x</code>, keep both sides equal.</p>
+            <div class="goal"><strong>Your goal:</strong> solve equations with two operations, such as <code>3x + 4 = 19</code>.</div>
+          </div>
+
+          <div class="step-block">
+            <p class="step-label"><span>1</span> See it</p>
+            <h2>The balance method</h2>
+            <div class="example">
+              <p class="example-title">Solve 3x + 4 = 19</p>
+              <div class="steps">
+                <p>3x + 4 = 19</p>
+                <p>Subtract 4 from both sides:</p>
+                <p>3x = 15</p>
+                <p>Divide both sides by 3:</p>
+                <p>x = 5</p>
+                <p>Check: 3 × 5 + 4 = 15 + 4 = 19.</p>
+              </div>
+            </div>
+            <h3>The backtracking method</h3>
+            <div class="machine-visual" aria-hidden="true">
+              <span class="machine-chip">x</span>
+              <span class="machine-arrow">→</span>
+              <span class="machine-chip">× 3</span>
+              <span class="machine-arrow">→</span>
+              <span class="machine-chip">+ 4</span>
+              <span class="machine-arrow">→</span>
+              <span class="machine-chip output">19</span>
+            </div>
+            <p>Work backwards: 19 − 4 = 15, then 15 ÷ 3 = <strong>5</strong>.</p>
+            <div class="callout">
+              <strong>Order matters:</strong> undo the addition or subtraction first. Then undo the multiplication or division.
+            </div>
+          </div>
+
+          <div class="step-block">
+            <p class="step-label"><span>2</span> Try it</p>
+            <h2>Guided equation solver</h2>
+            <p>Solve one step at a time. The second step unlocks after the first is correct.</p>
+            <div class="tool" id="equationTool">
+              <p class="tool-title">Solve the equation</p>
+              <p class="big-expression" id="eqDisplay">3x + 4 = 19</p>
+              <div class="guided-step" id="eqStep1">
+                <label class="inline-label">Step 1: What is <span id="eqAxLabel">3x</span>? <input type="number" id="eqStep1Input" inputmode="numeric" placeholder="?"></label>
+                <button class="btn primary small" id="eqStep1Check" type="button">Check step 1</button>
+                <p class="feedback" id="eqStep1Feedback" aria-live="polite"></p>
+              </div>
+              <div class="guided-step locked" id="eqStep2">
+                <label class="inline-label">Step 2: What is x? <input type="number" id="eqStep2Input" inputmode="numeric" placeholder="?"></label>
+                <button class="btn primary small" id="eqStep2Check" type="button">Check step 2</button>
+                <p class="feedback" id="eqStep2Feedback" aria-live="polite"></p>
+              </div>
+              <div class="tool-actions">
+                <button class="btn ghost small" id="eqNew" type="button">New equation</button>
+                <button class="link-btn" id="eqShow" type="button">Show me the full solution</button>
+              </div>
+              <div class="steps" id="eqSolution" hidden></div>
+            </div>
+
+            <h3>See the balance</h3>
+            <p>Each <code>x</code> tile is an unknown amount. Keep the scale balanced by doing the same thing to both sides.</p>
+            <div class="tool" id="balanceTool">
+              <p class="tool-title">Balance the equation</p>
+              <div class="balance-scene">
+                <div class="balance-side">
+                  <div class="balance-pan" id="balanceLeftPan" aria-label="Left side of the balance"></div>
+                  <p class="pan-label">left side</p>
+                </div>
+                <div class="balance-fulcrum" aria-hidden="true"></div>
+                <div class="balance-side">
+                  <div class="balance-pan" id="balanceRightPan" aria-label="Right side of the balance"></div>
+                  <p class="pan-label">right side</p>
+                </div>
+              </div>
+              <p class="big-expression" id="balanceEquation">3x + 4 = 19</p>
+              <div class="tool-actions">
+                <button class="btn primary small" id="balanceRemove" type="button">Remove 4 from both sides</button>
+                <button class="btn secondary small" id="balanceSplit" type="button" disabled>Split into 3 equal groups</button>
+                <button class="btn ghost small" id="balanceNew" type="button">New equation</button>
+              </div>
+              <p class="feedback" id="balanceFeedback" aria-live="polite"></p>
+              <p class="hint-text" id="balanceStatus">Do the same thing to both sides to keep the balance.</p>
+            </div>
+          </div>
+
+          <div class="step-block">
+            <p class="step-label"><span>3</span> Your turn</p>
+            <h2>Quick check</h2>
+            <div class="quiz" data-quiz="equations"></div>
+          </div>
+
+          <div class="lesson-nav">
+            <a class="btn ghost" href="#substitute">Previous lesson</a>
+            <button class="btn secondary complete-btn" data-complete="equations" type="button">Mark lesson complete</button>
+            <a class="btn primary" href="#graphs">Next lesson</a>
+          </div>
+        </section>
+
+        <!-- LESSON 8 -->
+        <section class="page lesson" id="page-graphs" data-page="graphs">
+          <div class="lesson-head">
+            <p class="eyebrow">Lesson 8</p>
+            <h1>Graphing a linear rule</h1>
+            <p class="lead">A linear rule makes a straight line. Build a table, plot the points, then join them with a ruler.</p>
+            <div class="goal"><strong>Your goal:</strong> graph a linear relationship from a table of values.</div>
+          </div>
+
+          <div class="step-block">
+            <p class="step-label"><span>1</span> See it</p>
+            <h2>Graph y = 2x − 1</h2>
+            <div class="table-wrap">
+              <table>
+                <caption>Table of values</caption>
+                <thead><tr><th>x</th><th>−2</th><th>−1</th><th>0</th><th>1</th><th>2</th></tr></thead>
+                <tbody><tr><th>y</th><td>−5</td><td>−3</td><td>−1</td><td>1</td><td>3</td></tr></tbody>
+              </table>
+            </div>
+            <p>Plot the points: <code>(−2, −5)</code>, <code>(−1, −3)</code>, <code>(0, −1)</code>, <code>(1, 1)</code>, <code>(2, 3)</code>.</p>
+            <p>Join them with a straight line and extend it.</p>
+            <div class="callout">
+              <strong>Along the corridor, then up the stairs:</strong> the first coordinate tells you how far across. The second tells you how far up or down.
+            </div>
+            <div class="graph-checklist">
+              <h3>Graphing checklist</h3>
+              <ul>
+                <li>Label the axes.</li>
+                <li>Use an even scale.</li>
+                <li>Plot <code>(x, y)</code> in the right order.</li>
+                <li>Join the points with a ruler.</li>
+                <li>Extend the line.</li>
+                <li>Check one point using the rule.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="step-block">
+            <p class="step-label"><span>2</span> Try it</p>
+            <h2>Graph explorer</h2>
+            <p>Change <code>m</code> and <code>c</code> in <code>y = mx + c</code>. Watch the line and the table change.</p>
+            <div class="tool graph-tool" id="graphTool">
+              <div class="graph-layout">
+                <div class="canvas-wrap">
+                  <canvas id="graphCanvas" width="1200" height="840" aria-label="Graph of a straight line"></canvas>
+                  <p class="canvas-fallback" id="canvasFallback">Graph of y = 2x + 1</p>
+                </div>
+                <div class="graph-controls">
+                  <p class="rule-line">Rule: <strong id="graphRule">y = 2x + 1</strong></p>
+                  <label class="range-label" for="graphM">Multiplier m <output id="graphMOut">2</output></label>
+                  <input type="range" id="graphM" min="-4" max="4" value="2">
+                  <label class="range-label" for="graphC">Constant c <output id="graphCOut">1</output></label>
+                  <input type="range" id="graphC" min="-6" max="6" value="1">
+                  <div class="table-wrap">
+                    <table id="graphTable">
+                      <thead><tr><th>x</th><th>−3</th><th>−2</th><th>−1</th><th>0</th><th>1</th><th>2</th><th>3</th></tr></thead>
+                      <tbody><tr><th>y</th><td>−5</td><td>−3</td><td>−1</td><td>1</td><td>3</td><td>5</td><td>7</td></tr></tbody>
+                    </table>
+                  </div>
+                  <p class="hint-text">The line crosses the y-axis at <code>c</code>. It goes up by <code>m</code> for every 1 step to the right.</p>
+                </div>
+              </div>
+            </div>
+
+            <h3>Plot it yourself</h3>
+            <p>Click the grid to plot each point from the table. When all five points are plotted, the straight line appears.</p>
+            <div class="tool" id="plotterTool">
+              <div class="graph-layout">
+                <div class="canvas-wrap">
+                  <canvas id="plotterCanvas" width="1200" height="840" aria-label="Coordinate grid for plotting points"></canvas>
+                  <p class="canvas-fallback" id="plotterFallback">Click the grid to plot a point.</p>
+                </div>
+                <div class="graph-controls">
+                  <p class="rule-line">Target rule: <strong id="plotterRule">y = 2x + 1</strong></p>
+                  <div class="table-wrap">
+                    <table id="plotterTable">
+                      <thead><tr><th>x</th><th>−2</th><th>−1</th><th>0</th><th>1</th><th>2</th></tr></thead>
+                      <tbody><tr><th>y</th><td>−3</td><td>−1</td><td>1</td><td>3</td><td>5</td></tr></tbody>
+                    </table>
+                  </div>
+                  <p class="hint-text" id="plotterProgress">0 of 5 points plotted.</p>
+                  <div class="tool-actions">
+                    <button class="btn ghost small" id="plotterHint" type="button">Show next point</button>
+                    <button class="btn ghost small" id="plotterReset" type="button">Reset grid</button>
+                  </div>
+                  <p class="feedback" id="plotterFeedback" aria-live="polite"></p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="step-block">
+            <p class="step-label"><span>3</span> Your turn</p>
+            <h2>Quick check</h2>
+            <div class="quiz" data-quiz="graphs"></div>
+          </div>
+
+          <div class="lesson-nav">
+            <a class="btn ghost" href="#equations">Previous lesson</a>
+            <button class="btn secondary complete-btn" data-complete="graphs" type="button">Mark lesson complete</button>
+            <a class="btn primary" href="#real-life">Next lesson</a>
+          </div>
+        </section>
+
+        <!-- LESSON 9 -->
+        <section class="page lesson" id="page-real-life" data-page="real-life">
+          <div class="lesson-head">
+            <p class="eyebrow">Lesson 9</p>
+            <h1>Real-life rules</h1>
+            <p class="lead">Linear functions are everywhere: taxi fares, savings, phone plans and hire costs.</p>
+            <div class="goal"><strong>Your goal:</strong> build and use a linear rule for a real-life situation.</div>
+          </div>
+
+          <div class="step-block">
+            <p class="step-label"><span>1</span> See it</p>
+            <h2>The modelling routine</h2>
+            <ol class="steps-list">
+              <li>Name the variables.</li>
+              <li>Find the <strong>starting value</strong> (constant).</li>
+              <li>Find the <strong>rate</strong> (multiplier).</li>
+              <li>Write the rule.</li>
+              <li>Substitute or solve.</li>
+              <li>Answer in context, with units.</li>
+            </ol>
+            <div class="story-grid">
+              <div class="story-card">
+                <h3>Taxi</h3>
+                <p>$6 flag fall plus $2 per km.</p>
+                <p class="big-expression">C = 2d + 6</p>
+              </div>
+              <div class="story-card">
+                <h3>Savings</h3>
+                <p>$60 saved, then $25 each week.</p>
+                <p class="big-expression">S = 25w + 60</p>
+              </div>
+              <div class="story-card">
+                <h3>Phone plan</h3>
+                <p>$30 per month plus $0.10 per MB.</p>
+                <p class="big-expression">C = 0.10m + 30</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="step-block">
+            <p class="step-label"><span>2</span> Try it</p>
+            <h2>Build a cost rule</h2>
+            <p>Choose a fixed cost, a cost per item and a number of items.</p>
+            <div class="tool" id="costTool">
+              <p class="tool-title">Cost builder</p>
+              <div class="control-grid">
+                <label class="range-label" for="costFixed">Fixed cost ($) <output id="costFixedOut">50</output></label>
+                <input type="range" id="costFixed" min="0" max="100" step="5" value="50">
+                <label class="range-label" for="costRate">Cost each ($) <output id="costRateOut">8</output></label>
+                <input type="range" id="costRate" min="0" max="30" step="1" value="8">
+                <label class="range-label" for="costQty">Number of items <output id="costQtyOut">5</output></label>
+                <input type="range" id="costQty" min="0" max="20" step="1" value="5">
+              </div>
+              <div class="tool-result">
+                <p class="rule-line">Rule: <strong id="costRule">C = 8n + 50</strong></p>
+                <p class="big-expression" id="costResult">Cost for 5 items = $90</p>
+                <p class="hint-text" id="costSteps">8 × 5 + 50 = 40 + 50 = 90</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="step-block">
+            <p class="step-label"><span>3</span> Your turn</p>
+            <h2>Design your own</h2>
+            <p>Choose a real-life situation. It needs a fixed cost and a cost for each item or hour.</p>
+            <div class="task-card">
+              <h3>Your task</h3>
+              <ol class="steps-list">
+                <li>Write the rule.</li>
+                <li>Make a table of values.</li>
+                <li>Draw the graph.</li>
+                <li>Write two questions about your graph.</li>
+                <li>Swap with a partner and answer each other's questions.</li>
+              </ol>
+              <p class="hint-text">Need an idea? Try a phone plan, gym membership, dog-walking business, lemonade stand or bike hire.</p>
+            </div>
+            <div class="quiz" data-quiz="real-life"></div>
+          </div>
+
+          <div class="lesson-nav">
+            <a class="btn ghost" href="#graphs">Previous lesson</a>
+            <button class="btn secondary complete-btn" data-complete="real-life" type="button">Mark lesson complete</button>
+            <a class="btn primary" href="#practice">Next: practice</a>
+          </div>
+        </section>
+
+        <!-- PRACTICE -->
+        <section class="page lesson" id="page-practice" data-page="practice">
+          <div class="lesson-head">
+            <p class="eyebrow">Lesson 10</p>
+            <h1>Practice challenge</h1>
+            <p class="lead">Ten mixed questions. Take your time, use the hints and check your answers.</p>
+            <div class="goal"><strong>Your goal:</strong> bring together everything you have learned.</div>
+          </div>
+
+          <div class="practice-shell">
+            <div id="practiceIntro">
+              <div class="practice-intro-card">
+                <h2>Ready?</h2>
+                <p>You will see one question at a time. You can check each answer and see an explanation.</p>
+                <ul class="check-list">
+                  <li>10 questions</li>
+                  <li>Instant feedback</li>
+                  <li>Score at the end</li>
+                </ul>
+                <button class="btn primary" id="practiceStart" type="button">Start practice</button>
+              </div>
+            </div>
+
+            <div id="practiceGame" hidden>
+              <div class="practice-top">
+                <span id="practiceCount">Question 1 of 10</span>
+                <span id="practiceScore">Score: 0</span>
+              </div>
+              <div class="progress-track" aria-hidden="true">
+                <div class="progress-fill" id="practiceProgress"></div>
+              </div>
+              <div id="practiceQuestion"></div>
+              <div class="feedback" id="practiceFeedback" aria-live="polite"></div>
+              <div class="practice-actions">
+                <button class="btn primary" id="practiceCheck" type="button">Check answer</button>
+                <button class="btn ghost" id="practiceNext" type="button" hidden>Next question</button>
+              </div>
+            </div>
+
+            <div id="practiceResult" hidden>
+              <div class="practice-intro-card result-card">
+                <p class="eyebrow">Challenge complete</p>
+                <h2 id="resultHeading">Nice work!</h2>
+                <p class="result-score" id="resultScore">You scored 0 out of 10.</p>
+                <p id="resultMessage"></p>
+                <div class="tool-actions">
+                  <button class="btn primary" id="practiceRestart" type="button">Try again</button>
+                  <a class="btn ghost" href="#home">Back to home</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="lesson-nav">
+            <a class="btn ghost" href="#real-life">Previous lesson</a>
+            <button class="btn secondary complete-btn" data-complete="practice" type="button">Mark practice complete</button>
+            <a class="btn primary" href="#home">Back to home</a>
+          </div>
+        </section>
+      </main>
+
+      <footer class="site-footer">
+        <p>Linear Functions Lab · Year 8 mathematics · Built for practice and confidence.</p>
+        <p class="footer-small">Tip: use the menu to move between lessons. Your progress is saved on this device.</p>
+      </footer>
+    </div>
+  </div>
+
+  <noscript>
+    <p class="noscript">This site works best with JavaScript enabled. The lesson explanations will still be readable.</p>
+  </noscript>
+</body>
+</html>
