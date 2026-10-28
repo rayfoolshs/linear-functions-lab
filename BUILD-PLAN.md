@@ -183,10 +183,14 @@ The goal of v2 is to make abstract ideas more visible and manipulable.
 
 ## 7. Acceptance criteria
 
-The v2 build is complete when:
+The v2 and v3 builds are complete when:
 
-- all four new interactives render and respond correctly
+- all new interactives render and respond correctly
 - each interactive is usable with a mouse, touch and keyboard where applicable
+- the table graph reveals its line when the correct rule is entered
+- the story builder updates the sentence, rule, result and bar model
+- the substitution machine reveals the final value at the right moment
+- the cost graph follows the rule and moves with the chosen quantity
 - no runtime errors occur
 - the mobile layout has no horizontal overflow
 - existing quizzes and progress tracking still work
